@@ -43,4 +43,8 @@ public class MainSCream extends JFrame {
 
 //TESTEI AQU!!! ESTRUTURA NÃO OFICIAL, TESTANDO FUNCS
 // Gui = JFrame!!!!
+
 // bosta 
+
+
+//import -> arquivo desejado -> mudanças -> salvar no eclipse -> git add no vs code
