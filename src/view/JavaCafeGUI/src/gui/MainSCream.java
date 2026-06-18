@@ -16,8 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import java.awt.ScrollPane;
+//import java.awt.ScrollPane;
 import javax.swing.JTextArea;
+import java.awt.Font;
 
 public class MainSCream extends JFrame {
 
@@ -67,7 +68,7 @@ public class MainSCream extends JFrame {
 	public MainSCream() {
 		// configuração da janela
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 500);
+		setBounds(100, 100, 1100, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -75,7 +76,7 @@ public class MainSCream extends JFrame {
 		
 		// para adicionar as abas
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 784, 461);
+		tabbedPane.setBounds(0, 0, 1097, 765);
 		contentPane.add(tabbedPane);
 		
 		////////////////////////////////////////
@@ -89,44 +90,46 @@ public class MainSCream extends JFrame {
 		// para mostrar o produto clicado
 		// configuração do label
 		JLabel lbl_Item = new JLabel("Item:");
-		lbl_Item.setBounds(10, 248, 210, 14);
+		lbl_Item.setFont(new Font("Dialog", Font.BOLD, 18));
+		lbl_Item.setBounds(10, 468, 119, 23);
 		salePanel.add(lbl_Item);
 
 		// configuração do textField
 		textField_Item = new JTextField();
-		textField_Item.setBounds(67, 245, 153, 20);
+		textField_Item.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textField_Item.setBounds(120, 467, 252, 23);
 		salePanel.add(textField_Item);
 		textField_Item.setColumns(10);
 		
 		// os itens do menu com a foto do produto
 		botaoCheesecake = new JButton("");
 		botaoCheesecake.setIcon(new ImageIcon(MainSCream.class.getResource("/imagens/5.png")));
-		botaoCheesecake.setBounds(10, 122, 100, 100);
+		botaoCheesecake.setBounds(10, 198, 175, 175);
 		salePanel.add(botaoCheesecake);
 		
 		botaoSandwich = new JButton("");
 		botaoSandwich.setIcon(new ImageIcon(MainSCream.class.getResource("/imagens/6.png")));
-		botaoSandwich.setBounds(120, 122, 100, 100);
+		botaoSandwich.setBounds(197, 198, 175, 175);
 		salePanel.add(botaoSandwich);
 		
 		botaoCroissant = new JButton("");
 		botaoCroissant.setIcon(new ImageIcon(MainSCream.class.getResource("/imagens/7.png")));
-		botaoCroissant.setBounds(231, 122, 100, 100);
+		botaoCroissant.setBounds(384, 198, 175, 175);
 		salePanel.add(botaoCroissant);
 		
 		botaoMatchaLatte = new JButton("");
 		botaoMatchaLatte.setIcon(new ImageIcon(MainSCream.class.getResource("/imagens/4.png")));
-		botaoMatchaLatte.setBounds(231, 11, 100, 100);
+		botaoMatchaLatte.setBounds(384, 11, 175, 175);
 		salePanel.add(botaoMatchaLatte);
 		
 		botaoCappuccino = new JButton("");
 		botaoCappuccino.setIcon(new ImageIcon(MainSCream.class.getResource("/imagens/3.png")));
-		botaoCappuccino.setBounds(120, 11, 100, 100);
+		botaoCappuccino.setBounds(197, 11, 175, 175);
 		salePanel.add(botaoCappuccino);
 		
 		botaoEspresso = new JButton("");
 		botaoEspresso.setIcon(new ImageIcon(MainSCream.class.getResource("/imagens/2.png")));
-		botaoEspresso.setBounds(10, 11, 100, 100);
+		botaoEspresso.setBounds(10, 11, 175, 175);
 		salePanel.add(botaoEspresso);
 
 		ActionListener menuListener = new ActionListener() {
@@ -164,17 +167,18 @@ public class MainSCream extends JFrame {
 		botaoCroissant.addActionListener(menuListener);
 		
 		JLabel lbl_Quantity = new JLabel("Quantity:");
-		lbl_Quantity.setBounds(10, 279, 58, 14);
+		lbl_Quantity.setFont(new Font("Dialog", Font.BOLD, 18));
+		lbl_Quantity.setBounds(10, 501, 138, 20);
 		salePanel.add(lbl_Quantity);
 		
 		textField_Quantity = new JTextField();
 		textField_Quantity.setColumns(10);
-		textField_Quantity.setBounds(67, 276, 153, 20);
+		textField_Quantity.setBounds(120, 498, 252, 23);
 		salePanel.add(textField_Quantity);
 		
 		// configuração para a tabela de itens do pedido
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(442, 18, 310, 146);
+		scrollPane.setBounds(744, 26, 310, 146);
 		salePanel.add(scrollPane);
 
 		table = new JTable();
@@ -190,30 +194,32 @@ public class MainSCream extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JLabel lbl_Quantity_1 = new JLabel("Tax:");
-		lbl_Quantity_1.setBounds(10, 313, 58, 14);
+		lbl_Quantity_1.setFont(new Font("Dialog", Font.BOLD, 18));
+		lbl_Quantity_1.setBounds(10, 533, 138, 21);
 		salePanel.add(lbl_Quantity_1);
 		
 		textField_Tax = new JTextField();
 		textField_Tax.setColumns(10);
-		textField_Tax.setBounds(67, 310, 153, 20);
+		textField_Tax.setBounds(120, 532, 252, 23);
 		salePanel.add(textField_Tax);
 		
 		JLabel lbl_Quantity_1_1 = new JLabel("Subtotal:");
-		lbl_Quantity_1_1.setBounds(10, 346, 58, 14);
+		lbl_Quantity_1_1.setFont(new Font("Dialog", Font.BOLD, 18));
+		lbl_Quantity_1_1.setBounds(10, 567, 150, 14);
 		salePanel.add(lbl_Quantity_1_1);
 		
 		textField_Subtotal = new JTextField();
 		textField_Subtotal.setColumns(10);
-		textField_Subtotal.setBounds(67, 343, 153, 20);
+		textField_Subtotal.setBounds(120, 566, 252, 23);
 		salePanel.add(textField_Subtotal);
 		
 		textField_total = new JTextField();
 		textField_total.setColumns(10);
-		textField_total.setBounds(67, 375, 153, 20);
+		textField_total.setBounds(120, 601, 252, 23);
 		salePanel.add(textField_total);
 		
 		JLabel lbl_Quantity_1_1_1 = new JLabel("Total:");
-		lbl_Quantity_1_1_1.setBounds(10, 378, 58, 14);
+		lbl_Quantity_1_1_1.setBounds(24, 617, 58, 14);
 		salePanel.add(lbl_Quantity_1_1_1);
 		
 		JButton btnNewButton_Confirm = new JButton("Confirm");
@@ -226,7 +232,7 @@ public class MainSCream extends JFrame {
 		textArea.setWrapStyleWord(true);
 
 		JScrollPane scrollPane2 = new JScrollPane(textArea);
-		scrollPane2.setBounds(442, 200, 310, 59);
+		scrollPane2.setBounds(600, 200, 310, 59);
 
 		salePanel.add(scrollPane2);
 		
@@ -287,13 +293,6 @@ public class MainSCream extends JFrame {
 				}
 			}
 		});
-
-		//////////////////////////////////////
-		
-		JLabel fundo = new JLabel("");
-		fundo.setIcon(new ImageIcon(MainSCream.class.getResource("/imagens/fundoJavaCafe.png")));
-		fundo.setBounds(0, -29, 795, 506);
-		salePanel.add(fundo);
 
 		////////////////////////////////////////
 		/// 					ABA DE ESTOQUE
