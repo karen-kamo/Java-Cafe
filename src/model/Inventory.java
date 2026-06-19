@@ -22,10 +22,10 @@ public class Inventory {
     listInventory.add(product);
   }
 
-  // método para procurar um produto pelo id
-  public Product findProduct(int id){
+  // método para procurar um produto pelo nome
+  public Product findProduct(String name){
     for (int i = 0; i < listInventory.size(); i++){
-      if (id == listInventory.get(i).getIdProduct()){
+      if (listInventory.get(i).getName().equalsIgnoreCase(name)){
         return listInventory.get(i);
       }
     }
@@ -33,8 +33,8 @@ public class Inventory {
   }
 
   // método para atualizar a quantidade de um produto
-  public void updateStockLevel(int id, int newQuantity){
-    Product p = findProduct(id);
+  public void updateStockLevel(String name, int newQuantity){
+    Product p = findProduct(name);
 
     // se foi encontrado
     if (p != null){

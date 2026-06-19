@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SaleSummary {
@@ -9,7 +10,7 @@ public class SaleSummary {
   // método construtor
   public SaleSummary(){
     // inicia a lista de Order do dia vazia
-    dailySales = new ArrayList<>();
+    this.dailySales = new ArrayList<>();
   }
 
   // métodos de acessos
@@ -20,6 +21,17 @@ public class SaleSummary {
   // método para adicionar Order ao SaleSummary
   public void addSale(Order order){
     dailySales.add(order);
+  }
+
+  // método para retornar todos os pedidos com a data buscada
+  public ArrayList<Order> getSalesByDate(LocalDate date){
+    ArrayList<Order> filteredSales = new ArrayList<>();
+    for (Order order : dailySales){
+      if (order.getDate().equals(date)){
+        filteredSales.add(order);
+      }
+    }
+    return filteredSales;
   }
 
   // método para retornar o total de Order
