@@ -3,6 +3,7 @@ package view;
 import controller.POSController;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -25,28 +26,25 @@ public class MainSCream extends JFrame {
 	private POSController controller;
 
 	private JPanel contentPane;
-	private JTextField textField_Item;
-	private JTextField textField_Quantity;
-	private JTable table;
-	private JTextField textField_Tax;
-	private JTextField textField_Subtotal;
-	private JTextField textField_total;
+	private JButton btnEspresso;
+	private JButton btnCappuccino;
+	private JButton btnMatchaLatte;
+	private JButton btnCheesecake;
+	private JButton btnSandwich;
+	private JButton btnCroissant;
+	private JTextField textFieldItem;
+	private JTextField textFieldQuantity;
+	private JTextField textFieldTax;
+	private JTextField textFieldSubtotal;
+	private JTextField textFieldTotal;
+	private JTable tableOrder;
 	private JTable table_1;
 	private JTextField textField;
 	private JTable table_2;
 	private JTextField textField_Data;
-	private JTextField textField_TotalRevenue;
+	private JTextField textFieldTotalRevenue;
 	private JTextField textField_NumberOfTransitions;
-	private JButton botaoEspresso;
-	private JButton botaoCappuccino;
-	private JButton botaoMatchaLatte;
-	private JButton botaoCheesecake;
-	private JButton botaoSandwich;
-	private JButton botaoCroissant;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -69,7 +67,7 @@ public class MainSCream extends JFrame {
 
 		// configuração da janela
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1100, 800);
+		setBounds(100, 100, 1100, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -77,7 +75,7 @@ public class MainSCream extends JFrame {
 		
 		// para adicionar as abas
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 1097, 761);
+		tabbedPane.setBounds(0, 0, 1097, 665);
 		contentPane.add(tabbedPane);
 		
 		////////////////////////////////////////
@@ -88,165 +86,179 @@ public class MainSCream extends JFrame {
 		tabbedPane.addTab("Sale", null, salePanel, null);
 		salePanel.setLayout(null);
 		
+		//////////////////////////////////////
 		// para mostrar o produto clicado
-		// configuração do label
-		JLabel lbl_Item = new JLabel("Item:");
-		lbl_Item.setBounds(10, 248, 210, 14);
-		salePanel.add(lbl_Item);
+		// configuração do label e textField de Item
+		JLabel lblItem = new JLabel("Item:");
+		lblItem.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblItem.setBounds(10, 407, 119, 22);
+		salePanel.add(lblItem);
 
-		// configuração do textField de Item
-		textField_Item = new JTextField();
-		textField_Item.setEnabled(false);
-		textField_Item.setBounds(67, 245, 153, 20);
-		salePanel.add(textField_Item);
-		textField_Item.setColumns(10);
-		
+		textFieldItem = new JTextField();
+		textFieldItem.setEnabled(false);
+		textFieldItem.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textFieldItem.setBounds(120, 406, 252, 23);
+		salePanel.add(textFieldItem);
+		textFieldItem.setColumns(10);
+
+		//////////////////////////////////////
 		// os itens do menu com a foto do produto
-		botaoCheesecake = new JButton("");
-		botaoCheesecake.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/5.png")));
-		botaoCheesecake.setBounds(10, 122, 100, 100);
-		salePanel.add(botaoCheesecake);
-		
-		botaoSandwich = new JButton("");
-		botaoSandwich.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/6.png")));
-		botaoSandwich.setBounds(120, 122, 100, 100);
-		salePanel.add(botaoSandwich);
-		
-		botaoCroissant = new JButton("");
-		botaoCroissant.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/7.png")));
-		botaoCroissant.setBounds(231, 122, 100, 100);
-		salePanel.add(botaoCroissant);
-		
-		botaoMatchaLatte = new JButton("");
-		botaoMatchaLatte.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/4.png")));
-		botaoMatchaLatte.setBounds(231, 11, 100, 100);
-		salePanel.add(botaoMatchaLatte);
-		
-		botaoCappuccino = new JButton("");
-		botaoCappuccino.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/3.png")));
-		botaoCappuccino.setBounds(120, 11, 100, 100);
-		salePanel.add(botaoCappuccino);
-		
-		botaoEspresso = new JButton("");
-		botaoEspresso.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/2.png")));
-		botaoEspresso.setBounds(10, 11, 100, 100);
-		salePanel.add(botaoEspresso);
+		btnEspresso = new JButton("");
+		btnEspresso.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/2.png")));
+		btnEspresso.setBounds(10, 11, 175, 175);
+		salePanel.add(btnEspresso);
 
+		btnCappuccino = new JButton("");
+		btnCappuccino.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/3.png")));
+		btnCappuccino.setBounds(197, 11, 175, 175);
+		salePanel.add(btnCappuccino);
+
+		btnMatchaLatte = new JButton("");
+		btnMatchaLatte.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/4.png")));
+		btnMatchaLatte.setBounds(384, 11, 175, 175);
+		salePanel.add(btnMatchaLatte);
+
+		btnCheesecake = new JButton("");
+		btnCheesecake.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/5.png")));
+		btnCheesecake.setBounds(10, 198, 175, 175);
+		salePanel.add(btnCheesecake);
+		
+		btnSandwich = new JButton("");
+		btnSandwich.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/6.png")));
+		btnSandwich.setBounds(197, 198, 175, 175);
+		salePanel.add(btnSandwich);
+		
+		btnCroissant = new JButton("");
+		btnCroissant.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/7.png")));
+		btnCroissant.setBounds(384, 198, 175, 175);
+		salePanel.add(btnCroissant);
 		ActionListener menuListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
 				String nameProduct = ""; // para guardar nome do produto
 
-				// verificando qual item do menu foi clicado
-				// e salvar o nome
-				if (e.getSource() == botaoEspresso){
-					nameProduct = "Espresso";
-				}  else if (e.getSource() == botaoCappuccino){
-					nameProduct = "Cappuccino";
-				} else if (e.getSource() == botaoMatchaLatte){
-					nameProduct = "Matcha Latte";
-				} else if (e.getSource() == botaoCheesecake){
-					nameProduct = "Cheesecake";
-				} else if (e.getSource() == botaoSandwich){
-					nameProduct = "Sandwich";
-				} else if (e.getSource() == botaoCroissant){
-					nameProduct = "Croissant";
-				}
+				// verificando qual item do menu foi clicado e salvar o nome
+				if (e.getSource() == btnEspresso) nameProduct = "Espresso";
+				else if (e.getSource() == btnCappuccino) nameProduct = "Cappuccino";
+				else if (e.getSource() == btnMatchaLatte) nameProduct = "Matcha Latte";
+				else if (e.getSource() == btnCheesecake) nameProduct = "Cheesecake";
+				else if (e.getSource() == btnSandwich) nameProduct = "Sandwich";
+				else if (e.getSource() == btnCroissant) nameProduct = "Croissant";
 
 				// colocando o nome do produto no TextField de Item
-				textField_Item.setText(nameProduct);
-				textField_Quantity.setText("1");
+				textFieldItem.setText(nameProduct);
+				textFieldQuantity.setText("1");
 			}
 		};
 
-		botaoEspresso.addActionListener(menuListener);
-		botaoCappuccino.addActionListener(menuListener);
-		botaoMatchaLatte.addActionListener(menuListener);
-		botaoCheesecake.addActionListener(menuListener);
-		botaoSandwich.addActionListener(menuListener);
-		botaoCroissant.addActionListener(menuListener);
+		btnEspresso.addActionListener(menuListener);
+		btnCappuccino.addActionListener(menuListener);
+		btnMatchaLatte.addActionListener(menuListener);
+		btnCheesecake.addActionListener(menuListener);
+		btnSandwich.addActionListener(menuListener);
+		btnCroissant.addActionListener(menuListener);
 		
-		JLabel lbl_Quantity = new JLabel("Quantity:");
-		lbl_Quantity.setBounds(10, 279, 58, 14);
-		salePanel.add(lbl_Quantity);
+		//////////////////////////////////////
+		// configuração do label e textField de Quantity
+		JLabel lblQuantity = new JLabel("Quantity:");
+		lblQuantity.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblQuantity.setBounds(10, 435, 138, 32);
+		salePanel.add(lblQuantity);
 		
-		textField_Quantity = new JTextField();
-		textField_Quantity.setColumns(10);
-		textField_Quantity.setBounds(67, 276, 153, 20);
-		salePanel.add(textField_Quantity);
+		textFieldQuantity = new JTextField();
+		textFieldQuantity.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textFieldQuantity.setColumns(10);
+		textFieldQuantity.setBounds(120, 441, 252, 23);
+		salePanel.add(textFieldQuantity);
 		
-		// configuração para a tabela de itens do pedido
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(442, 18, 310, 146);
-		salePanel.add(scrollPane);
+		//////////////////////////////////////
+		/// organizando a parte financeira
+		// configuração do label e textField de Tax - desabilitado
+		JLabel lblTax = new JLabel("Tax:");
+		lblTax.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblTax.setBounds(10, 476, 138, 21);
+		salePanel.add(lblTax);
+		
+		textFieldTax = new JTextField();
+		textFieldTax.setEnabled(false);
+		textFieldTax.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textFieldTax.setColumns(10);
+		textFieldTax.setBounds(120, 476, 252, 23);
+		salePanel.add(textFieldTax);
+		
+		// configuração do label e textField de Subtotal - desabilitado
+		JLabel lblSubtotal = new JLabel("Subtotal:");
+		lblSubtotal.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblSubtotal.setBounds(10, 515, 150, 14);
+		salePanel.add(lblSubtotal);
+		
+		textFieldSubtotal = new JTextField();
+		textFieldSubtotal.setEnabled(false);
+		textFieldSubtotal.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textFieldSubtotal.setColumns(10);
+		textFieldSubtotal.setBounds(120, 511, 252, 23);
+		salePanel.add(textFieldSubtotal);
+		
+		// configuração do label e textField de Total - desabilitado
+		JLabel lblTotal = new JLabel("Total:");
+		lblTotal.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblTotal.setBounds(10, 547, 119, 23);
+		salePanel.add(lblTotal);
 
-		table = new JTable();
-		table.setBackground(new Color(255, 255, 255));
-		table.setModel(new DefaultTableModel(
+		textFieldTotal = new JTextField();
+		textFieldTotal.setEnabled(false);
+		textFieldTotal.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textFieldTotal.setColumns(10);
+		textFieldTotal.setBounds(120, 546, 252, 23);
+		salePanel.add(textFieldTotal);
+		
+		//////////////////////////////////////
+		// configuração para a tabela de itens do pedido - como recibo
+		// para scrollar a tabela
+		JScrollPane scrollPaneOrder = new JScrollPane();
+		scrollPaneOrder.setBounds(616, 11, 438, 175);
+		salePanel.add(scrollPaneOrder);
+
+		tableOrder = new JTable();
+		tableOrder.setBackground(new Color(255, 255, 255));
+		// definindo o modelo da tabela - colunas
+		tableOrder.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"Item", "Price", "Quantity"
 			}
 		));
+		tableOrder.setFont(new Font("Dialog", Font.PLAIN, 18));
+		tableOrder.setRowHeight(32);
+		tableOrder.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 18));
 
-		scrollPane.setViewportView(table);
+		scrollPaneOrder.setViewportView(tableOrder);
 		
-		// configuração do textField Tax - desabilitado
-		JLabel lbl_Quantity_1 = new JLabel("Tax:");
-		lbl_Quantity_1.setBounds(10, 313, 58, 14);
-		salePanel.add(lbl_Quantity_1);
-		
-		textField_Tax = new JTextField();
-		textField_Tax.setEnabled(false);
-		textField_Tax.setColumns(10);
-		textField_Tax.setBounds(67, 310, 153, 20);
-		salePanel.add(textField_Tax);
-		
-		// configuração do textField Subtotal - desabilitado
-		JLabel lbl_Quantity_1_1 = new JLabel("Subtotal:");
-		lbl_Quantity_1_1.setBounds(10, 346, 58, 14);
-		salePanel.add(lbl_Quantity_1_1);
-		
-		textField_Subtotal = new JTextField();
-		textField_Subtotal.setEnabled(false);
-		textField_Subtotal.setColumns(10);
-		textField_Subtotal.setBounds(67, 343, 153, 20);
-		salePanel.add(textField_Subtotal);
-		
-		// configuração do textField Total - desabilitado
-		textField_total = new JTextField();
-		textField_total.setEnabled(false);
-		textField_total.setColumns(10);
-		textField_total.setBounds(67, 375, 153, 20);
-		salePanel.add(textField_total);
-		
-		JLabel lbl_Quantity_1_1_1 = new JLabel("Total:");
-		lbl_Quantity_1_1_1.setBounds(10, 378, 58, 14);
-		salePanel.add(lbl_Quantity_1_1_1);
-		
+		//////////////////////////////////////
+		// configuração do textArea para mensagens
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 
-		JScrollPane scrollPane2 = new JScrollPane(textArea);
-		scrollPane2.setBounds(442, 200, 310, 59);
-
-		salePanel.add(scrollPane2);
+		// para scrollar o textArea de mensagens
+		JScrollPane scrollPaneTextArea = new JScrollPane(textArea);
+		scrollPaneTextArea.setBounds(616, 292, 438, 80);
+		salePanel.add(scrollPaneTextArea);
 
 		//////////////////////////////////////
-
 		// Configuração do botão de adicionar produto no pedido
 		JButton btnAdd = new JButton("Add Product");
-		btnAdd.setBounds(592, 280, 163, 23);
+		btnAdd.setFont(new Font("Dialog", Font.BOLD, 18));
+		btnAdd.setBounds(802, 441, 252, 23);
 		salePanel.add(btnAdd);
 
 		// Adicionando um produto selecionado na tabela
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
-				String nameProduct = textField_Item.getText(); // pega o nome do produto
+				String nameProduct = textFieldItem.getText(); // pega o nome do produto
 
 				// se ainda não foi selecionado, manda aviso
 				if (nameProduct.isEmpty()){
@@ -256,7 +268,7 @@ public class MainSCream extends JFrame {
 
 				try {
 					// tenta converter o texto para int
-					int quantity = Integer.parseInt(textField_Quantity.getText());
+					int quantity = Integer.parseInt(textFieldQuantity.getText());
 
 					// verifica se a quantidade é menor ou igual a zero
 					if (quantity <= 0){
@@ -274,9 +286,9 @@ public class MainSCream extends JFrame {
 					controller.addItemToOrder(nameProduct, quantity);
 
 					// atualiza a parte financeira na tela
-					textField_Subtotal.setText(String.format("%.2f", controller.getSubtotal()));
-					textField_Tax.setText(String.format("%.2f", controller.getTax()));
-					textField_total.setText(String.format("%.2f", controller.getTotal()));
+					textFieldSubtotal.setText(String.format("%.2f", controller.getSubtotal()));
+					textFieldTax.setText(String.format("%.2f", controller.getTax()));
+					textFieldTotal.setText(String.format("%.2f", controller.getTotal()));
 
 					// atualiza as linhas da tabela de pedido
 					updateTableOrder();
@@ -285,8 +297,8 @@ public class MainSCream extends JFrame {
 					textArea.append(String.format("\nSUCESS: Added %dx %s to your order.", quantity, nameProduct));
 
 					// limpa os seletores para próximo produto
-					textField_Item.setText("");
-					textField_Quantity.setText("");
+					textFieldItem.setText("");
+					textFieldQuantity.setText("");
 					
 				} catch (NumberFormatException ex) {
 					// se for digitado algo que não é número
@@ -296,18 +308,18 @@ public class MainSCream extends JFrame {
 		});
 
 		//////////////////////////////////////
-		
 		// Configuração do botão de remover produto do pedido
 		JButton btnRemove = new JButton("Remove");
-		btnRemove.setBounds(592, 309, 163, 23);
+		btnRemove.setFont(new Font("Dialog", Font.BOLD, 18));
+		btnRemove.setBounds(802, 476, 252, 23);
 		salePanel.add(btnRemove);
 
-		// Removendo um produto selecionado na tabela
+		// Removendo um item pelo evento disparado pelo botão
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
 				// guarda a linha selecionada
-				int selectedRow = table.getSelectedRow();
+				int selectedRow = tableOrder.getSelectedRow();
 
 				// verifica se tem alguma linha selecionada
 				if (selectedRow == -1){
@@ -315,16 +327,16 @@ public class MainSCream extends JFrame {
 					return;
 				}
 
-				DefaultTableModel modelTable = (DefaultTableModel) table.getModel();
+				DefaultTableModel modelTable = (DefaultTableModel) tableOrder.getModel();
         String productName = modelTable.getValueAt(selectedRow, 0).toString();
 
         // aciona o controller para remover
         controller.removeSingleItemFromOrder(productName);
 
         // atualiza a parte financeira
-        textField_Subtotal.setText(String.format("%.2f", controller.getSubtotal()));
-        textField_Tax.setText(String.format("%.2f", controller.getTax()));
-        textField_total.setText(String.format("%.2f", controller.getTotal()));
+        textFieldSubtotal.setText(String.format("%.2f", controller.getSubtotal()));
+        textFieldTax.setText(String.format("%.2f", controller.getTax()));
+        textFieldTotal.setText(String.format("%.2f", controller.getTotal()));
 
         // atualiza a tabela
         updateTableOrder();
@@ -334,14 +346,14 @@ public class MainSCream extends JFrame {
 		});
 
 		//////////////////////////////////////
-		
-		// Configuração do botão de confirmar o pedido
-		JButton btnNewButton_Confirm = new JButton("Confirm");
-		btnNewButton_Confirm.setBounds(592, 346, 163, 51);
-		salePanel.add(btnNewButton_Confirm);
+		// Configuração do botão de confirmar o pedido e evento
+		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm.setFont(new Font("Dialog", Font.BOLD, 18));
+		btnConfirm.setBounds(802, 511, 252, 58);
+		salePanel.add(btnConfirm);
 
-		// Confirmando a venda do pedido
-		btnNewButton_Confirm.addActionListener((new ActionListener() {
+		// Realizando o pedido pelo evento disparado pelo botão
+		btnConfirm.addActionListener((new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
 				// verifica se o pedido não está vazio
@@ -355,9 +367,9 @@ public class MainSCream extends JFrame {
 					controller.checkoutCurrentOrder();
 
 					// zera os campos financeiros
-					textField_Subtotal.setText("0.00");
-					textField_Tax.setText("0.00");
-					textField_total.setText("0.00");
+					textFieldSubtotal.setText("0.00");
+					textFieldTax.setText("0.00");
+					textFieldTotal.setText("0.00");
 
 					// limpa a tabela
 					updateTableOrder();
@@ -377,12 +389,11 @@ public class MainSCream extends JFrame {
 		}));
 
 		//////////////////////////////////////
-		
-		// Configuração do fundo da janela de venda
-		JLabel fundo = new JLabel("");
-		fundo.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/fundoJavaCafe.png")));
-		fundo.setBounds(0, -29, 795, 506);
-		salePanel.add(fundo);
+		// configuração do fundo da janela de venda
+		JLabel backgroundSaleTab = new JLabel("");
+		backgroundSaleTab.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/FundoJavaCafe_Venda.png")));
+		backgroundSaleTab.setBounds(-68, -34, 1200, 713);
+		salePanel.add(backgroundSaleTab);
 
 		////////////////////////////////////////
 		/// 					ABA DE ESTOQUE
@@ -393,6 +404,9 @@ public class MainSCream extends JFrame {
 		inventoryPanel.setLayout(null);
 		
 		table_1 = new JTable();
+		table_1.setFont(new Font("Dialog", Font.PLAIN, 18));
+		table_1.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 18));
+		table_1.setRowHeight(35);
 		table_1.setModel(new DefaultTableModel(
 			new Object[][] {},
 			new String[] {
@@ -401,25 +415,29 @@ public class MainSCream extends JFrame {
 		));
 
 		JScrollPane scrollPane3 = new JScrollPane(table_1);
-		scrollPane3.setBounds(29, 48, 720, 226);
+		scrollPane3.setBounds(61, 48, 952, 251);
 
 		inventoryPanel.add(scrollPane3);
 		
 		JLabel lblNewLabel = new JLabel("Quantity:");
-		lblNewLabel.setBounds(100, 310, 69, 20);
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblNewLabel.setBounds(61, 323, 146, 35);
 		inventoryPanel.add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(157, 309, 135, 23);
+		textField.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textField.setBounds(165, 330, 252, 23);
 		inventoryPanel.add(textField);
 		textField.setColumns(10);
 		
 		JButton btnAddQuantity = new JButton("Add");
-		btnAddQuantity.setBounds(411, 307, 135, 23);
+		btnAddQuantity.setFont(new Font("Dialog", Font.BOLD, 18));
+		btnAddQuantity.setBounds(499, 330, 252, 23);
 		inventoryPanel.add(btnAddQuantity);
 		
 		JButton btnRemoveQuantity = new JButton("Remove");
-		btnRemoveQuantity.setBounds(560, 307, 135, 23);
+		btnRemoveQuantity.setFont(new Font("Dialog", Font.BOLD, 18));
+		btnRemoveQuantity.setBounds(761, 330, 252, 23);
 		inventoryPanel.add(btnRemoveQuantity);
 
 		JLabel lblMsg = new JLabel("");
@@ -503,7 +521,11 @@ public class MainSCream extends JFrame {
 
 		btnAddQuantity.addActionListener(inventoryListener);
     btnRemoveQuantity.addActionListener(inventoryListener);
-
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/FundoJavaCafe_Estoque.png")));
+		lblNewLabel_3.setBounds(-68, -34, 1200, 713);
+		inventoryPanel.add(lblNewLabel_3);
 		
 		////////////////////////////////////////
 		/// 					ABA DO ADMIN
@@ -512,7 +534,7 @@ public class MainSCream extends JFrame {
 		JPanel admPanel = new JPanel();
 		tabbedPane.addTab("Manager Area", null, admPanel, null);
 		admPanel.setLayout(null);
-		
+	
 		table_2 = new JTable();
 		table_2.setBounds(21, 78, 720, 167);
 		admPanel.add(table_2);
@@ -520,40 +542,59 @@ public class MainSCream extends JFrame {
 		JLabel lblMsg2 = new JLabel("");
 		lblMsg2.setBounds(100, 310, 200, 200);
 		admPanel.add(lblMsg2);
+		table_2.setFont(new Font("Dialog", Font.PLAIN, 18));
+		table_2.setRowHeight(35);
+
+		JScrollPane scrollPane4 = new JScrollPane(table_2);
+		scrollPane4.setBounds(21, 78, 1044, 360);
+
+		admPanel.add(scrollPane4);
+		
 		
 		JLabel lblNewLabel_1 = new JLabel("Date:");
-		lblNewLabel_1.setBounds(21, 37, 59, 14);
+		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblNewLabel_1.setBounds(21, 37, 89, 14);
 		admPanel.add(lblNewLabel_1);
 		
 		textField_Data = new JTextField();
-		
-		textField_Data.setBounds(59, 34, 243, 20);
+		textField_Data.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textField_Data.setBounds(83, 33, 252, 23);
 		admPanel.add(textField_Data);
 		textField_Data.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Research");
-		btnNewButton.setBounds(652, 33, 89, 23);
+		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 18));
+		btnNewButton.setBounds(813, 33, 252, 23);
 		admPanel.add(btnNewButton);
 		
-		textField_TotalRevenue = new JTextField();
-		textField_TotalRevenue.setEnabled(false);
-		textField_TotalRevenue.setColumns(10);
-		textField_TotalRevenue.setBounds(109, 273, 224, 20);
-		admPanel.add(textField_TotalRevenue);
+		textFieldTotalRevenue = new JTextField();
+		textFieldTotalRevenue.setEnabled(false);
+		textFieldTotalRevenue.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textFieldTotalRevenue.setColumns(10);
+		textFieldTotalRevenue.setBounds(175, 460, 252, 23);
+		admPanel.add(textFieldTotalRevenue);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Total revenue:");
-		lblNewLabel_1_1.setBounds(21, 276, 112, 14);
+		lblNewLabel_1_1.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblNewLabel_1_1.setBounds(21, 465, 193, 14);
 		admPanel.add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Number of transitions:");
-		lblNewLabel_1_1_1.setBounds(384, 276, 161, 14);
+		lblNewLabel_1_1_1.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblNewLabel_1_1_1.setBounds(586, 465, 226, 14);
 		admPanel.add(lblNewLabel_1_1_1);
 		
 		textField_NumberOfTransitions = new JTextField();
 		textField_NumberOfTransitions.setEnabled(false);
+		textField_NumberOfTransitions.setFont(new Font("Dialog", Font.PLAIN, 18));
 		textField_NumberOfTransitions.setColumns(10);
-		textField_NumberOfTransitions.setBounds(517, 273, 224, 20);
+		textField_NumberOfTransitions.setBounds(813, 460, 252, 23);
 		admPanel.add(textField_NumberOfTransitions);
+
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/FundoJavaCafe_Adm.png")));
+		lblNewLabel_4.setBounds(-68, -34, 1200, 713);
+		admPanel.add(lblNewLabel_4);
 
 		updateTableInventory();
 	}
@@ -561,7 +602,7 @@ public class MainSCream extends JFrame {
 	// método para atualizar a tabela de pedidos
 	private void updateTableOrder(){
 		// pegamos o modelo de dados relacionado ao JTable
-		DefaultTableModel modelTable = (DefaultTableModel) table.getModel();
+		DefaultTableModel modelTable = (DefaultTableModel) tableOrder.getModel();
 
 		// limpamos todas as linhas antigas
 		modelTable.setRowCount(0);
@@ -592,3 +633,6 @@ public class MainSCream extends JFrame {
 		}
 	}
 }
+		
+		
+
