@@ -1,11 +1,15 @@
 package view;
 
 import controller.POSController;
+import model.Order;
+import model.Product;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -38,12 +42,13 @@ public class MainSCream extends JFrame {
 	private JTextField textFieldSubtotal;
 	private JTextField textFieldTotal;
 	private JTable tableOrder;
-	private JTable table_1;
-	private JTextField textField;
-	private JTable table_2;
-	private JTextField textField_Data;
+	private JTable tableInventory;
+	private JTextField textFieldQuantityInv;
+	private JTable tableSales;
+	private JTextField textFieldDate;
 	private JTextField textFieldTotalRevenue;
-	private JTextField textField_NumberOfTransitions;
+	private JTextField textFieldNumberTransactions;
+	private JLabel lblMsgSales;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -59,9 +64,6 @@ public class MainSCream extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public MainSCream(POSController posController) {
 		this.controller = posController;
 
@@ -294,7 +296,7 @@ public class MainSCream extends JFrame {
 					updateTableOrder();
 
 					// envia mensagem de sucesso
-					textArea.append(String.format("\nSUCESS: Added %dx %s to your order.", quantity, nameProduct));
+					textArea.append(String.format("\nSUCCESS: Added %dx %s to your order.", quantity, nameProduct));
 
 					// limpa os seletores para próximo produto
 					textFieldItem.setText("");
@@ -302,7 +304,7 @@ public class MainSCream extends JFrame {
 					
 				} catch (NumberFormatException ex) {
 					// se for digitado algo que não é número
-					textArea.append("\nERROR: Please enter a whole number.");
+					textArea.append("\nERROR: Please enter a whole number on Quantity.");
 				}
 			}
 		});
@@ -383,7 +385,7 @@ public class MainSCream extends JFrame {
 
 				} catch (Exception ex) {
 					// se der algum erro inesperado
-					textArea.append("\nERROR: Failed to finalize purchase. " + ex.getMessage());
+					textArea.append("\nERROR: Failed to finalize purchase.");
 				}
 			}
 		}));
@@ -398,77 +400,88 @@ public class MainSCream extends JFrame {
 		////////////////////////////////////////
 		/// 					ABA DE ESTOQUE
 		////////////////////////////////////////
-		
+		// configurando a aba de inventory
 		JPanel inventoryPanel = new JPanel();
 		tabbedPane.addTab("Inventory", null, inventoryPanel, null);
 		inventoryPanel.setLayout(null);
 		
-		table_1 = new JTable();
-		table_1.setFont(new Font("Dialog", Font.PLAIN, 18));
-		table_1.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 18));
-		table_1.setRowHeight(35);
-		table_1.setModel(new DefaultTableModel(
+		// configuração da tabela de estoque
+		tableInventory = new JTable();
+		tableInventory.setFont(new Font("Dialog", Font.PLAIN, 18));
+		tableInventory.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 18));
+		tableInventory.setRowHeight(35);
+		// terá 3 colunas - Item, Price e Quantity
+		tableInventory.setModel(new DefaultTableModel(
 			new Object[][] {},
 			new String[] {
 				"Item", "Price", "Quantity"
 			}
 		));
 
-		JScrollPane scrollPane3 = new JScrollPane(table_1);
-		scrollPane3.setBounds(61, 48, 952, 251);
-
-		inventoryPanel.add(scrollPane3);
+		// adicionando um scroll para a tabela
+		JScrollPane scrollPaneInventory = new JScrollPane(tableInventory);
+		scrollPaneInventory.setBounds(61, 48, 952, 251);
+		inventoryPanel.add(scrollPaneInventory);
 		
-		JLabel lblNewLabel = new JLabel("Quantity:");
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblNewLabel.setBounds(61, 323, 146, 35);
-		inventoryPanel.add(lblNewLabel);
+		//////////////////////////////////////
+		// configuração do label e textField de Quantity
+		JLabel lblQuantityInv = new JLabel("Quantity:");
+		lblQuantityInv.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblQuantityInv.setBounds(61, 323, 146, 35);
+		inventoryPanel.add(lblQuantityInv);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Dialog", Font.PLAIN, 18));
-		textField.setBounds(165, 330, 252, 23);
-		inventoryPanel.add(textField);
-		textField.setColumns(10);
+		textFieldQuantityInv = new JTextField();
+		textFieldQuantityInv.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textFieldQuantityInv.setBounds(165, 330, 252, 23);
+		inventoryPanel.add(textFieldQuantityInv);
+		textFieldQuantityInv.setColumns(10);
 		
+		//////////////////////////////////////
+		// configuração do botão de Add do Quantity
 		JButton btnAddQuantity = new JButton("Add");
 		btnAddQuantity.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnAddQuantity.setBounds(499, 330, 252, 23);
 		inventoryPanel.add(btnAddQuantity);
 		
+		//////////////////////////////////////
+		// configuração do botão de Remove do Quantity
 		JButton btnRemoveQuantity = new JButton("Remove");
 		btnRemoveQuantity.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnRemoveQuantity.setBounds(761, 330, 252, 23);
 		inventoryPanel.add(btnRemoveQuantity);
 
-		JLabel lblMsg = new JLabel("");
-		lblMsg.setBounds(100, 310, 200, 200);
-		inventoryPanel.add(lblMsg);
+		//////////////////////////////////////
+		// configuração do label para exibir mensagens ao usuário
+		JLabel lblMsgInv = new JLabel("");
+		lblMsgInv.setBounds(100, 310, 500, 200);
+		inventoryPanel.add(lblMsgInv);
 
+		// associando ações do usuário ao botão com os eventos
 		ActionListener inventoryListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
 				// verificar se alguma linha da tabela foi selecionada
-				int selectedRow = table_1.getSelectedRow();
+				int selectedRow = tableInventory.getSelectedRow();
 				if (selectedRow == -1){
-					lblMsg.setText("WARNING: Please, select an item from the inventory table first.");
+					lblMsgInv.setText("<html><font color='orange'><b>WARNING:</b></font> Please, select an item from the inventory table first.</html>");
 					return;
 				}
 
 				// tenta pegar quantidade desejada no textField
 				int quantityInput = 0;
 				try {
-					quantityInput = Integer.parseInt(textField.getText());
+					quantityInput = Integer.parseInt(textFieldQuantityInv.getText());
 					if (quantityInput <= 0){
-						lblMsg.setText("WARNING: Quantity must be greater than zero.");
+						lblMsgInv.setText("<html><font color='orange'><b>WARNING:</b></font> Quantity must be greater than zero.</html>");
 						return;
 					}
 				} catch (NumberFormatException ex) {
-					lblMsg.setText("ERROR: Please enter a whole number in the quantity field.");
+					lblMsgInv.setText("<html><font color='red'><b>ERROR:</b></font> Please enter a whole number in the quantity field.</html>");
 					return;
 				}
 
 				// pega o nome do produto da linha selecionada
-				DefaultTableModel modelTable = (DefaultTableModel) table_1.getModel();
+				DefaultTableModel modelTable = (DefaultTableModel) tableInventory.getModel();
 				String productName = modelTable.getValueAt(selectedRow, 0).toString();
 
 				// procura o produto correspodene na lista do controller
@@ -495,26 +508,26 @@ public class MainSCream extends JFrame {
 					updateTableInventory();
 
 					// atualiza a tela
-					textField.setText("");
-					lblMsg.setText(String.format("SUCCESS: Added %d units to %s stock.", quantityInput, productName));
+					textFieldQuantityInv.setText("");
+					lblMsgInv.setText(String.format("<html><font color='green'><b>SUCCESS:</b></font> Added %d units to %s stock.</html>", quantityInput, productName));
 
 				}  else if (e.getSource() == btnRemoveQuantity){
 					// verifica se a quantidade que temos é suficiente para remover
 					if (productSelected.getStockQuantity() < quantityInput){
-						lblMsg.setText("WARNING: Cannot remove more items than available in stock.");
+						lblMsgInv.setText("<html><font color='orange'><b>WARNING:</b></font> Cannot remove more items than available in stock.</html>");
 						return;
 					}
 
 					// reduz a quantidade desejada
 					productSelected.deductStock(quantityInput);
-					lblMsg.setText(String.format("SUCCESS: Removed %d units from %s stock.", quantityInput, productName));
+					lblMsgInv.setText(String.format("<html><font color='green'><b>SUCCESS:</b></font> Removed %d units from %s stock.</html>", quantityInput, productName));
 
 					// salvas as alterações no arquivo csv
 					persistence.DataManager.saveCompleteInventory(controller.getInventory());
 
 					// atualiza os componentes visuais e limpa o texto
 					updateTableInventory();
-					textField.setText("");
+					textFieldQuantityInv.setText("");
 				}
 			}
 		};
@@ -522,51 +535,101 @@ public class MainSCream extends JFrame {
 		btnAddQuantity.addActionListener(inventoryListener);
     btnRemoveQuantity.addActionListener(inventoryListener);
 		
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/FundoJavaCafe_Estoque.png")));
-		lblNewLabel_3.setBounds(-68, -34, 1200, 713);
-		inventoryPanel.add(lblNewLabel_3);
+		//////////////////////////////////////
+		// configuração do fundo da janela de inventory
+		JLabel backgroundInventoryTab = new JLabel("");
+		backgroundInventoryTab.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/FundoJavaCafe_Estoque.png")));
+		backgroundInventoryTab.setBounds(-68, -34, 1200, 713);
+		inventoryPanel.add(backgroundInventoryTab);
 		
 		////////////////////////////////////////
 		/// 					ABA DO ADMIN
 		////////////////////////////////////////
-		
+		// configurando a aba de Manager Area
 		JPanel admPanel = new JPanel();
 		tabbedPane.addTab("Manager Area", null, admPanel, null);
 		admPanel.setLayout(null);
 	
-		table_2 = new JTable();
-		table_2.setBounds(21, 78, 720, 167);
-		admPanel.add(table_2);
+		//////////////////////////////////////
+		// configuração da tabela de sales
+		tableSales = new JTable();
+		tableSales.setBounds(21, 78, 720, 167);
+		tableSales.setFont(new Font("Dialog", Font.PLAIN, 18));
+		tableSales.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 18));
+		tableSales.setRowHeight(35);
+		// terá 3 colunas - Date, Product Name and Price 
+		tableSales.setModel(new DefaultTableModel(
+			new Object[][] {},
+			new String[] {
+				"Date", "Product", "Price"
+			}
+		));
+		admPanel.add(tableSales);
 
-		JLabel lblMsg2 = new JLabel("");
-		lblMsg2.setBounds(100, 310, 200, 200);
-		admPanel.add(lblMsg2);
-		table_2.setFont(new Font("Dialog", Font.PLAIN, 18));
-		table_2.setRowHeight(35);
+		// para scrollar a tabela de sales
+		JScrollPane scrollPaneTableSales = new JScrollPane(tableSales);
+		scrollPaneTableSales.setBounds(21, 78, 1044, 360);
+		admPanel.add(scrollPaneTableSales);
 
-		JScrollPane scrollPane4 = new JScrollPane(table_2);
-		scrollPane4.setBounds(21, 78, 1044, 360);
+		//////////////////////////////////////
+		// configuração da label para exigir mensagens ao usuário
+		lblMsgSales = new JLabel("");
+		lblMsgSales.setBounds(10, 547, 500, 30);
+		admPanel.add(lblMsgSales);
+		
+		//////////////////////////////////////
+		// configuração do label e textField de Date - para busca das vendas
+		JLabel lblDate = new JLabel("Date:");
+		lblDate.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblDate.setBounds(21, 37, 89, 14);
+		admPanel.add(lblDate);
+		
+		textFieldDate = new JTextField();
+		textFieldDate.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textFieldDate.setBounds(83, 33, 252, 23);
+		textFieldDate.setColumns(10);
+		admPanel.add(textFieldDate);
+		
+		//////////////////////////////////////
+		// configuração do botão de Research para buscar por date
+		JButton btnResearch = new JButton("Research");
+		btnResearch.setFont(new Font("Dialog", Font.BOLD, 18));
+		btnResearch.setBounds(813, 33, 252, 23);
+		admPanel.add(btnResearch);
 
-		admPanel.add(scrollPane4);
+		btnResearch.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				if (e.getSource() == btnResearch){
+					// pega a data digitada
+					String inputDate = textFieldDate.getText().trim(); 
+
+					// verifica se o campo está vazio
+					if (inputDate.isEmpty()){
+						lblMsgSales.setText("<html><font color='orange'><b>WARNING:</b></font> Please enter a date (YYYY-MM-DD).</html>");
+						return;
+					}
+
+					try {
+						// tenta converter o texto para uma data válida
+						java.time.LocalDate searchDate = java.time.LocalDate.parse(inputDate);
+						lblMsgSales.setText(""); // limpa a mensagem anterior
+
+						// chama a função que busca e atualiza a tabela
+						updateDashboard(searchDate);
+					} catch (java.time.format.DateTimeParseException ex) {
+						lblMsgSales.setText("<html><font color='red'><b>ERROR:</b></font> Invalid format. Use YYYY-MM-DD.</html>");
+					}
+				}
+		}});
 		
-		
-		JLabel lblNewLabel_1 = new JLabel("Date:");
-		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblNewLabel_1.setBounds(21, 37, 89, 14);
-		admPanel.add(lblNewLabel_1);
-		
-		textField_Data = new JTextField();
-		textField_Data.setFont(new Font("Dialog", Font.PLAIN, 18));
-		textField_Data.setBounds(83, 33, 252, 23);
-		admPanel.add(textField_Data);
-		textField_Data.setColumns(10);
-		
-		JButton btnNewButton = new JButton("Research");
-		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 18));
-		btnNewButton.setBounds(813, 33, 252, 23);
-		admPanel.add(btnNewButton);
-		
+		//////////////////////////////////////
+		// configuração do label e textField de Total Revenue - desabilitado
+		JLabel lblTotalRevenue = new JLabel("Total revenue:");
+		lblTotalRevenue.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblTotalRevenue.setBounds(21, 465, 193, 14);
+		admPanel.add(lblTotalRevenue);
+
 		textFieldTotalRevenue = new JTextField();
 		textFieldTotalRevenue.setEnabled(false);
 		textFieldTotalRevenue.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -574,28 +637,28 @@ public class MainSCream extends JFrame {
 		textFieldTotalRevenue.setBounds(175, 460, 252, 23);
 		admPanel.add(textFieldTotalRevenue);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Total revenue:");
-		lblNewLabel_1_1.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblNewLabel_1_1.setBounds(21, 465, 193, 14);
-		admPanel.add(lblNewLabel_1_1);
+		//////////////////////////////////////
+		// configuração do label e textField de NumberTransactions - desabilitado
+		JLabel lblNumberTransactions = new JLabel("Number of transactions:");
+		lblNumberTransactions.setFont(new Font("Dialog", Font.BOLD, 18));
+		lblNumberTransactions.setBounds(586, 465, 226, 14);
+		admPanel.add(lblNumberTransactions);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Number of transitions:");
-		lblNewLabel_1_1_1.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblNewLabel_1_1_1.setBounds(586, 465, 226, 14);
-		admPanel.add(lblNewLabel_1_1_1);
-		
-		textField_NumberOfTransitions = new JTextField();
-		textField_NumberOfTransitions.setEnabled(false);
-		textField_NumberOfTransitions.setFont(new Font("Dialog", Font.PLAIN, 18));
-		textField_NumberOfTransitions.setColumns(10);
-		textField_NumberOfTransitions.setBounds(813, 460, 252, 23);
-		admPanel.add(textField_NumberOfTransitions);
+		textFieldNumberTransactions = new JTextField();
+		textFieldNumberTransactions.setEnabled(false);
+		textFieldNumberTransactions.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textFieldNumberTransactions.setColumns(10);
+		textFieldNumberTransactions.setBounds(813, 460, 252, 23);
+		admPanel.add(textFieldNumberTransactions);
 
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/FundoJavaCafe_Adm.png")));
-		lblNewLabel_4.setBounds(-68, -34, 1200, 713);
-		admPanel.add(lblNewLabel_4);
+		//////////////////////////////////////
+		// configuração do fundo da janela de Manager Area
+		JLabel backgroundAdminTab = new JLabel("");
+		backgroundAdminTab.setIcon(new ImageIcon(MainSCream.class.getResource("imagens/FundoJavaCafe_Adm.png")));
+		backgroundAdminTab.setBounds(-68, -34, 1200, 713);
+		admPanel.add(backgroundAdminTab);
 
+		// carregando a tabela de estoque pelo primeira vez
 		updateTableInventory();
 	}
 
@@ -620,7 +683,7 @@ public class MainSCream extends JFrame {
 
 	// método para atualizar a tela de estoque
 	private void updateTableInventory(){
-		DefaultTableModel modelTable = (DefaultTableModel) table_1.getModel();
+		DefaultTableModel modelTable = (DefaultTableModel) tableInventory.getModel();
 		modelTable.setRowCount(0); // limpando as linhas antigas da tabela
 
 		// varre todo o estoque real que o controller carregou
@@ -630,6 +693,39 @@ public class MainSCream extends JFrame {
 				String.format("%.2f", p.getPrice()),
 				p.getStockQuantity()
 			});
+		}
+	}
+
+	// método que vai atualizar a aba de admin dependendo da data procurada pelo manager
+	private void updateDashboard(java.time.LocalDate searchDate){
+		DefaultTableModel modelSales = (DefaultTableModel) tableSales.getModel(); // pega modelo da tabela Sales
+		modelSales.setRowCount(0); // limpa a tabela antes de buscar
+
+		// pega a lista de pedidos que ocorreu na data buscada
+		ArrayList<Order> filteredOrders = controller.getSaleSummary().getSalesByDate(searchDate);
+
+		// percorre os pedidos e insere cada produto nas linhas da tabela
+		for (Order order : filteredOrders){
+			for (Product p : order.getListProducts()){
+				modelSales.addRow(new Object[]{
+					order.getDate().toString(),
+					p.getName(),
+					String.format("%.2f", p.getPrice())
+				});
+			}
+		}
+
+		// atualiza os campos financeiros
+		double totalRevenue = controller.getSaleSummary().getTotalRevenueDaily(searchDate);
+		int totalTransactions = controller.getSaleSummary().getTransactionCountDaily(searchDate);
+
+		textFieldTotalRevenue.setText(String.format("$ %.2f", totalRevenue));
+		textFieldNumberTransactions.setText(String.valueOf(totalTransactions));
+
+		if (totalTransactions == 0){
+			lblMsgSales.setText("No sales records found for this date.");
+		} else {
+			lblMsgSales.setText(""); // limpa o aviso se estiver tudo OK
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import model.Inventory;
 import model.Order;
@@ -15,11 +16,13 @@ public class POSController {
   // build constructor
   public POSController(){
     this.inventory = new Inventory();
-    this.currentOrder = new Order();
     this.saleSummary = new SaleSummary();
 
-    // quando o caixa abre, carrega o estoque
+    // quando o caixa abre, carrega o estoque e o histórico de vendas
     DataManager.loadInventory(inventory);
+    DataManager.loadSalesHistory(saleSummary, inventory);
+
+    this.currentOrder = new Order();
   }
 
   // ações que vão ser disparadas pelos botões
@@ -84,6 +87,8 @@ public class POSController {
     // pega a data do pedido
     currentOrder.finalizeOrder();
 
+    DataManager.saveSaleRecord(currentOrder);
+
     // adiciona a venda para o relatório do dia
     saleSummary.addSale(currentOrder);
 
@@ -107,11 +112,15 @@ public class POSController {
     return this.inventory;
   }
 
+  public SaleSummary getSaleSummary(){
+    return this.saleSummary;
+  }
+
   public double getSubtotal() { return currentOrder.calculateSubtotal(); }
   public double getTax() { return currentOrder.calculateTax(); }
   public double getTotal() { return currentOrder.calculateTotal(); }
 
-  public double getTotalRevenue() { return saleSummary.getTotalRevenue(); }
-  public int getTransactionCount() { return saleSummary.getTransactionCount();}
+  public double getTotalRevenueDaily(LocalDate date) { return saleSummary.getTotalRevenueDaily(date); }
+  public int getTransactionCountDaily(LocalDate date) { return saleSummary.getTransactionCountDaily(date);}
 
 }

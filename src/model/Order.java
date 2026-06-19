@@ -16,9 +16,15 @@ public class Order {
   public Order(){
     this.orderId = countId;
     countId++; // criar ID automaticamente
+    listProducts = new ArrayList<>(); // inicia a lista de pedidos vazia
+  }
 
-    // inicia a lista de pedidos vazia
-    listProducts = new ArrayList<>();
+  // construtor para reconstruir dados do arquivo de vendas
+  // para não mexer no countId da memória
+  public Order(int orderId, LocalDate date){
+    this.orderId = orderId;
+    this.date = date;
+    this.listProducts = new ArrayList<>();
   }
 
   // métodos de acesso 
@@ -26,13 +32,26 @@ public class Order {
     return this.orderId;
   }
 
+  public void setIdOrder(int id){
+    this.orderId = id;
+  }
+
   public LocalDate getDate(){
     return date;
+  }
+
+  public void setDate(LocalDate date){
+    this.date = date;
   }
 
   // método para retornar a lista de produtos do pedido
   public ArrayList<Product> getListProducts(){
     return this.listProducts;
+  }
+
+  // método para atualizar o contador global do ID
+  public static void updateGlobalCounter(int maxId){
+    countId = maxId + 1;
   }
 
   // método para adicionar um produto ao pedido
