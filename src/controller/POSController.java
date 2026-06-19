@@ -1,6 +1,5 @@
 package controller;
 
-import exception.OutOfStockException;
 import java.util.ArrayList;
 import model.Inventory;
 import model.Order;
@@ -23,7 +22,9 @@ public class POSController {
     DataManager.loadInventory(inventory);
   }
 
-  // ações que vão disparadas pelos botões
+  // ações que vão ser disparadas pelos botões
+
+  // método para adicionar produto no pedido
   public void addItemToOrder(String productName, int quantity){
     // procura produto pelo nome
     for (Product p : inventory.getListInventory()) {
@@ -34,19 +35,54 @@ public class POSController {
     }
   }
 
-  // finalização da venda atual
-  public void checkoutCurrentOrder() throws OutOfStockException{
-    // verifica se tem estoque de todos os produtos do pedido
+  // método para verificar se existe estoque para o produto
+  public boolean hasEnoughStock(String productName, int quantityRequested){
+    for (Product pInv : inventory.getListInventory()){
+      if (pInv.getName().equalsIgnoreCase(productName)){
+
+        // conta quantos produtos desse tem no carrinho
+        int quantityOnOrder = 0;
+        for (Product pOrder : currentOrder.getListProducts()){
+          if (pOrder.getName().equalsIgnoreCase(productName)){
+            // quer dizer que tem 
+            quantityOnOrder++;
+          }
+        }
+
+        // se já o que tem + o que quer colocar passa do estoque, retorn falso
+        if (quantityOnOrder + quantityRequested > pInv.getStockQuantity()) return false;
+
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // método para remover 1 item do pedido
+  public void removeSingleItemFromOrder(String productName){
+    // procura na lista a primeira ocorrência do produto e remove
     for (Product p : currentOrder.getListProducts()){
-      if (p.getStockQuantity() < 1){
-        throw new OutOfStockException("Insufficient stock to " + p.getName());
+      if (p.getName().equalsIgnoreCase(productName)){
+        currentOrder.removeProduct(p); // remove do pedido
+        break;
+      }
+    }
+  }
+
+  // finalização da venda atual
+  public void checkoutCurrentOrder(){
+    // dando baixa no estoque produto a produto
+    for (Product p : currentOrder.getListProducts()){
+      for (Product stockProduct : inventory.getListInventory()){
+        if (stockProduct.getName().equalsIgnoreCase(p.getName())){
+          stockProduct.deductStock(1); // da baixa item por item
+          break;
+        }
       }
     }
 
-    // se possui estoque, tem que diminuir estoque
-    for (Product p : currentOrder.getListProducts()){
-      p.deductStock(1);
-    }
+    // pega a data do pedido
+    currentOrder.finalizeOrder();
 
     // adiciona a venda para o relatório do dia
     saleSummary.addSale(currentOrder);
@@ -67,9 +103,13 @@ public class POSController {
     return currentOrder.getListProducts();
   }
 
+  public Inventory getInventory(){
+    return this.inventory;
+  }
+
   public double getSubtotal() { return currentOrder.calculateSubtotal(); }
   public double getTax() { return currentOrder.calculateTax(); }
-  public double getTotal() { return currentOrder.calculateSubtotal(); }
+  public double getTotal() { return currentOrder.calculateTotal(); }
 
   public double getTotalRevenue() { return saleSummary.getTotalRevenue(); }
   public int getTransactionCount() { return saleSummary.getTransactionCount();}

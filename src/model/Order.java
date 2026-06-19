@@ -1,27 +1,33 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Order {
   // attributes of Order
-  private int id;
+  private int orderId;
   private ArrayList<Product> listProducts; // lista de produtos que serão comprados
+  private LocalDate date; // salvar data da compra
 
   // static counter to generate globally unique IDs
   private static int countId = 0;
 
   // builder construtor
   public Order(){
-    this.id = countId;
+    this.orderId = countId;
     countId++; // criar ID automaticamente
 
     // inicia a lista de pedidos vazia
     listProducts = new ArrayList<>();
   }
 
-  // método de acesso 
+  // métodos de acesso 
   public int getIdOrder(){
-    return this.id;
+    return this.orderId;
+  }
+
+  public LocalDate getDate(){
+    return date;
   }
 
   // método para retornar a lista de produtos do pedido
@@ -41,9 +47,9 @@ public class Order {
     listProducts.remove(product);
   }
 
-  // método para limpar o pedido
-  public void clearOrder(){
-    listProducts.clear();
+  // método para pegar a data do pedido
+  public void finalizeOrder(){
+    this.date = LocalDate.now();
   }
 
   // método para calcular o subtotal dos pedidos
@@ -70,18 +76,5 @@ public class Order {
     double subtotalValue = calculateSubtotal();
     double taxValue = calculateTax();
     return subtotalValue + taxValue;
-  }
-
-  // método para gerar o recibo
-  public String generateReceipt(){
-    String receipt = "======== Java Café ========\n";
-    for (int i = 0; i < listProducts.size(); i++){
-      receipt += listProducts.get(i).getName() + " - R$ " + listProducts.get(i).getPrice() + "\n";
-    }
-    receipt += String.format("\nSub-total: R$ %.2f",calculateSubtotal());
-    receipt += String.format("\nTax: R$ %.2f", calculateTax());
-    receipt += String.format("\nTotal: R$ %.2f", calculateTotal());
-    receipt += "\n===========================";
-    return receipt;
   }
 }
