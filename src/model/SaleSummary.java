@@ -4,29 +4,30 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SaleSummary {
-  // atributos de SaleSummary
-  ArrayList<Order> sales; // lista de Order
+  // SaleSummary attributes
+  ArrayList<Order> sales; // order list
 
-  // método construtor
+  // constructor method
   public SaleSummary(){
-    // inicia a lista de Order vazia
+    // starts the Order list empty
     this.sales = new ArrayList<>();
   }
 
-  // métodos de acessos
+  // attribute access method
   public ArrayList<Order> getSales(){
     return this.sales;
   }
 
-  // método para adicionar Order ao SaleSummary
+  // method to add Order to SaleSummary
   public void addSale(Order order){
     sales.add(order);
   }
 
-  // método para retornar todos os pedidos com a data buscada
+  // method to return all orders with the searched date
   public ArrayList<Order> getSalesByDate(LocalDate date){
     ArrayList<Order> filteredSales = new ArrayList<>();
     for (Order order : sales){
+      // if the searched date matches what exists
       if (order.getDate().equals(date)){
         filteredSales.add(order);
       }
@@ -34,17 +35,20 @@ public class SaleSummary {
     return filteredSales;
   }
 
-  // método para retornar o total de Order de um dia específico
+  // method to return the total Orders for a specific day
   public int getTransactionCountDaily(LocalDate date){
+    // generates a sales list for the desired day
     ArrayList<Order> filteredSales = getSalesByDate(date);
-    return filteredSales.size();
+    return filteredSales.size(); // returns the size of the list
   }
 
-  // método para retornar o total do dia
+  // method to return the daily total
   public double getTotalRevenueDaily(LocalDate date){
     double dailyTotal = 0;
+    // generates a sales list for the desired day
     ArrayList<Order> filteredSales = getSalesByDate(date);
     for (int i = 0; i < filteredSales.size(); i++){
+      // add up the total of each sale
       dailyTotal += filteredSales.get(i).calculateTotal();
     }
 

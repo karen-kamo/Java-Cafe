@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Order {
-  // attributes of Order
-  private int orderId;
-  private ArrayList<Product> listProducts; // lista de produtos que serão comprados
-  private LocalDate date; // salvar data da compra
+  // Order attributes
+  private int orderId; // ID by order
+  private ArrayList<Product> listProducts; // list of products to be purchased
+  private LocalDate date; // save purchase date
 
   // static counter to generate globally unique IDs
   private static int countId = 0;
@@ -15,19 +15,19 @@ public class Order {
   // builder construtor
   public Order(){
     this.orderId = countId;
-    countId++; // criar ID automaticamente
-    listProducts = new ArrayList<>(); // inicia a lista de pedidos vazia
+    countId++; // every time a new order is generated, the ID is incremented
+    listProducts = new ArrayList<>(); // starts the empty order list
   }
 
-  // construtor para reconstruir dados do arquivo de vendas
-  // para não mexer no countId da memória
+  // a constructor to rebuild sales file data without
+  // altering the countId stored in memory.
   public Order(int orderId, LocalDate date){
     this.orderId = orderId;
     this.date = date;
     this.listProducts = new ArrayList<>();
   }
 
-  // métodos de acesso 
+  // attribute access method
   public int getIdOrder(){
     return this.orderId;
   }
@@ -44,34 +44,34 @@ public class Order {
     this.date = date;
   }
 
-  // método para retornar a lista de produtos do pedido
+  // method to return the list of products from the order
   public ArrayList<Product> getListProducts(){
     return this.listProducts;
   }
 
-  // método para atualizar o contador global do ID
+  // method to update the global ID counter
   public static void updateGlobalCounter(int maxId){
     countId = maxId + 1;
   }
 
-  // método para adicionar um produto ao pedido
+  // method for adding a product to an order
   public void addProduct(Product product, int quantity){
     for (int i = 0; i < quantity; i++){
       listProducts.add(product);
     }
   }
 
-  // método para retirar um produto do pedido
+  // method for removing a product from an order
   public void removeProduct(Product product){
     listProducts.remove(product);
   }
 
-  // método para pegar a data do pedido
+  // method for stamping the order date
   public void finalizeOrder(){
     this.date = LocalDate.now();
   }
 
-  // método para calcular o subtotal dos pedidos
+  // method for calculating the subtotal of products ordered
   public double calculateSubtotal(){
     double sumSubtotal = 0;
 
@@ -83,14 +83,14 @@ public class Order {
     return sumSubtotal;
   }
 
-  // método para calcular a taxa de serviço
-  // será uma taxa de 5% do valor do subtotal
+  // method for calculating the service fee
+  // it will be a rate of 5% of the subtotal value.
   public double calculateTax(){
     double subtotalValue = calculateSubtotal();
     return (subtotalValue * 5) / 100;
   }
 
-  // método para calcular o total a ser pago
+  // method for calculating the total to be paid
   public double calculateTotal(){
     double subtotalValue = calculateSubtotal();
     double taxValue = calculateTax();

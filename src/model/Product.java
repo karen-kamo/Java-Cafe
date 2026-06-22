@@ -1,7 +1,7 @@
 package model;
 
 public class Product {
-  // attributes of Product
+  // Product attributes
   private String name;
   private double price;
   private int stockQuantity;
@@ -13,7 +13,8 @@ public class Product {
     this.stockQuantity  = stockQuantity;
   }
 
-  // access methods for attributes
+  // attribute access method
+  // don't need setName and setPrice, because you won't be able to modify them.
   public String getName(){
     return this.name;
   }

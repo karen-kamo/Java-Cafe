@@ -3,40 +3,40 @@ package model;
 import java.util.ArrayList;
 
 public class Inventory {
-  // atributos de Inventory
-  private ArrayList<Product> listInventory; // lista do estoque
+  // Inventory attributes
+  private ArrayList<Product> listInventory; // stock list
 
   // builder method
   public Inventory(){
-    // inicia a lista de produtos vazia
+    // starts the empty product list
     listInventory = new ArrayList<>();
   }
 
-  // método de acesso
+  // attribute access method
   public ArrayList<Product> getListInventory(){
     return this.listInventory;
   }
 
-  // método para adicionar um produto novo ao estoque
+  // method for adding a new product to inventory
   public void addProduct(Product product){
     listInventory.add(product);
   }
 
-  // método para procurar um produto pelo nome
+  // method for searching for a product by name
   public Product findProduct(String name){
     for (int i = 0; i < listInventory.size(); i++){
       if (listInventory.get(i).getName().equalsIgnoreCase(name)){
         return listInventory.get(i);
       }
     }
-    return null; // se não achar, retorna null
+    return null; // if it doesn't find it, it returns null.
   }
 
-  // método para atualizar a quantidade de um produto
+  // method for updating the quantity of a product
   public void updateStockLevel(String name, int newQuantity){
-    Product p = findProduct(name);
+    Product p = findProduct(name); // use the method of searching by name.
 
-    // se foi encontrado
+    // if it was found
     if (p != null){
       p.setStockQuantity(newQuantity);
     }
