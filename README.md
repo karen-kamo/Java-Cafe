@@ -3,7 +3,7 @@ O projeto desenvolvido neste repositório trata-se de um sistema de vendas simpl
 
 ---
 
-## #️💻 Como rodar 
+## 💻 Como rodar 
 Este guia fornece o passo a passo necessário para configurar o ambiente, compilar e executar o sistema Java Café a partir do código fonte, garantindo que o sistema funcione corretamente de forma independente na máquina desejada.
 
 ### 1. Pré-requisitos e Instalações de Softwares
