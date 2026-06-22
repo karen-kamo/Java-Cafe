@@ -111,7 +111,8 @@ Para garantir o isolamento e independência de ambientes de desenvolvimento, os 
   ```
 
   - Pronto! O programa está rodando.✨
-<img width="1092" height="658" alt="image" src="https://github.com/user-attachments/assets/73b4693f-eb10-4819-abf7-5d8020b7ede7" />
+<img width="1099" height="689" alt="image" src="https://github.com/user-attachments/assets/8813109d-abe5-4d3f-aa97-8fcf2c8ab75c" />
+
 
 ---
 
