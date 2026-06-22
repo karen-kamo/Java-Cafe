@@ -63,17 +63,54 @@ A pasta extraída contém a pasta src e dentro dela, o projeto segue a seguinte 
 
 ### 3. Compilação e Execução via Linha de Comando (Terminal)
 Para garantir o isolamento e independência de ambientes de desenvolvimento, os procedimentos abaixo descrevem o processo manual de compilação através do terminal:
+  - No Windows:
+    - Abra o terminal na pasta raiz do projeto (JavaCafe/).
+    - Crie uma pasta chamada bin para organizar os arquivos compilados e execute o comando de compilação:
+    ```
+    mkdir bin
+    javac -d bin src\model\Inventory.java src\model\Order.java src\model\Product.java src\model\SaleSummary.java src\persistence\DataManager.java src\controller\POSController.java src\view\JavaCafeGUI.java
+    ```
 
-  - Abra o terminal no diretório raiz do projeto (JavaCafe/).
-  - Execute o comando abaixo para compilar todos os arquivos .java do projeto de uma só vez:
-```
-javac view/JavaCafeGUI.java controller/*.java model/*.java persistence/*.java
-```
-  - Execute o comando abaixo para executar o sistema:
-```
-javac view/JavaCafeGUI.java controller/*.java model/*.java persistence/*.java
-```
-  - Pronto! O programa está rodando✨
+    - Copie a pasta de imagens para dentro do diretório bin para que a interface gráfica consiga carregar os ícones dos produtos:
+    ```
+    xcopy src\view\imagens bin\view\imagens /E /I /Y
+    ```
+    
+    - Copie os arquivos de banco de dados (.csv) existentes para a pasta de binários para garantir a persistência dos dados:
+    ```
+    copy *.csv bin\
+    ```
+
+    - Agora, execute o sistema informando a pasta bin como origem e chamando a classe principal:
+    ```
+    java -cp bin view.JavaCafeGUI
+    ```
+    
+  - No Linux:
+    - Abra o terminal na pasta raiz do projeto (JavaCafe/).
+    - Crie uma pasta chamada bin para organizar os arquivos compilados e execute o comando de compilação:
+    ```
+    mkdir bin
+    javac -d bin src/model/*.java src/persistence/*.java src/controller/*.java src/view/JavaCafeGUI.java
+    ```
+    
+    - Copie a pasta de imagens para dentro do diretório bin para que a interface gráfica consiga carregar os ícones dos produtos:
+    ```
+    mkdir -p bin/view/imagens && cp src/view/imagens/* bin/view/imagens/
+    ```
+
+    - Copie os arquivos de banco de dados (.csv) existentes para a pasta de binários para garantir a persistência dos dados:
+    ```
+    cp *.csv bin/
+    ```
+    
+    - Agora, execute o sistema informando a pasta bin como origem e chamando a classe principal:
+    ```
+     java -cp bin view.JavaCafeGUI
+    ```
+
+  - Pronto! O programa está rodando.✨
+<img width="1092" height="658" alt="image" src="https://github.com/user-attachments/assets/73b4693f-eb10-4819-abf7-5d8020b7ede7" />
 
 ---
 
