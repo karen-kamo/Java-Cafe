@@ -1,5 +1,5 @@
 <h1 align="center"> Java Cafe ☕ </h1>
-O projeto desenvolvido neste repositório trata-se de um sistema de vendas simples para uma cafeteria, feita a partir da linguagem Java. A aplicação foi construído abordando os conceitos vistos em sala de aula na disciplina SCC0504 - Programação Orientada a Objetos, ministrada pelo professor Dilvan de Abreu Moreira.
+O projeto desenvolvido neste repositório trata-se de um sistema de vendas simples para uma cafeteria, feita a partir da linguagem Java. A aplicação foi construído abordando os conceitos vistos em sala de aula na disciplina SCC0504 - Programação Orientada a Objetos, ministrada pelo professor Dilvan de Abreu Moreira. O relatório do projeto se encontra na pasta raiz do repositório com o nome 'report_JavaCafe'.
 
 ---
 ## 🍵 Funcionalidades
@@ -90,24 +90,10 @@ Para garantir o isolamento e independência de ambientes de desenvolvimento, os 
   # No Linux
   mkdir -p bin/view/imagens && cp src/view/imagens/* bin/view/imagens/
   ```
-  
-  - Copie os arquivos de banco de dados (.csv) existentes para a pasta de binários para garantir a persistência dos dados:
-  ```
-  # No Windows
-  copy src\*.csv bin\
-
-  # No Linux
-  cp src/*.csv bin/
-  ```
-
-  - Vá para a pasta /bin
-  ```
-  cd bin
-  ```
 
   - Agora, execute o sistema informando a pasta bin como origem e chamando a classe principal:
   ```
-  java view.JavaCafeGUI
+  java -cp bin view.JavaCafeGUI
   ```
 
   - Pronto! O programa está rodando.✨
