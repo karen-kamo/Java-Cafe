@@ -264,6 +264,8 @@ public class JavaCafeGUI extends JFrame {
 		JButton btnAdd = new JButton("Add Product");
 		btnAdd.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnAdd.setBounds(802, 441, 252, 23);
+		btnAdd.setBackground(Color.decode("#4f1e0c"));
+		btnAdd.setForeground(Color.decode("#ffe49c"));
 		salePanel.add(btnAdd);
 
 		// adding a selected product to the table
@@ -324,6 +326,8 @@ public class JavaCafeGUI extends JFrame {
 		JButton btnRemove = new JButton("Remove");
 		btnRemove.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnRemove.setBounds(802, 476, 252, 23);
+		btnRemove.setBackground(Color.decode("#4f1e0c"));
+		btnRemove.setForeground(Color.decode("#ffe49c"));
 		salePanel.add(btnRemove);
 
 		// removing an item via an event triggered by the button
@@ -362,6 +366,8 @@ public class JavaCafeGUI extends JFrame {
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnConfirm.setBounds(802, 511, 252, 58);
+		btnConfirm.setBackground(Color.decode("#ffe49c"));
+		btnConfirm.setForeground(Color.decode("#4f1e0c"));
 		salePanel.add(btnConfirm);
 
 		// placing the order through the event triggered by the button
@@ -408,14 +414,14 @@ public class JavaCafeGUI extends JFrame {
 		salePanel.add(backgroundSaleTab);
 
 		////////////////////////////////////////
-		/// 	STOCK TAB				
+		/// 	INVENTORY TAB				
 		////////////////////////////////////////
 		// configuring the inventory tab
 		JPanel inventoryPanel = new JPanel();
 		tabbedPane.addTab("Inventory", null, inventoryPanel, null);
 		inventoryPanel.setLayout(null);
 		
-		// stock table configuration
+		// inventory table configuration
 		tableInventory = new JTable();
 		tableInventory.setFont(new Font("Dialog", Font.PLAIN, 18));
 		tableInventory.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 18));
@@ -451,6 +457,8 @@ public class JavaCafeGUI extends JFrame {
 		JButton btnAddQuantity = new JButton("Add");
 		btnAddQuantity.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnAddQuantity.setBounds(499, 330, 252, 23);
+		btnAddQuantity.setBackground(Color.decode("#4f1e0c"));
+		btnAddQuantity.setForeground(Color.decode("#ffe49c"));
 		inventoryPanel.add(btnAddQuantity);
 		
 		//////////////////////////////////////
@@ -458,6 +466,8 @@ public class JavaCafeGUI extends JFrame {
 		JButton btnRemoveQuantity = new JButton("Remove");
 		btnRemoveQuantity.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnRemoveQuantity.setBounds(761, 330, 252, 23);
+		btnRemoveQuantity.setBackground(Color.decode("#4f1e0c"));
+		btnRemoveQuantity.setForeground(Color.decode("#ffe49c"));
 		inventoryPanel.add(btnRemoveQuantity);
 
 		//////////////////////////////////////
@@ -607,6 +617,8 @@ public class JavaCafeGUI extends JFrame {
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnSearch.setBounds(813, 33, 252, 23);
+		btnSearch.setBackground(Color.decode("#4f1e0c"));
+		btnSearch.setForeground(Color.decode("#ffe49c"));
 		admPanel.add(btnSearch);
 
 		btnSearch.addActionListener(new ActionListener() {
