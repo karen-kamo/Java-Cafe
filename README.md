@@ -2,6 +2,13 @@
 O projeto desenvolvido neste repositório trata-se de um sistema de vendas simples para uma cafeteria, feita a partir da linguagem Java. A aplicação foi construído abordando os conceitos vistos em sala de aula na disciplina SCC0504 - Programação Orientada a Objetos, ministrada pelo professor Dilvan de Abreu Moreira.
 
 ---
+## 🍵 Funcionalidades
+O sistema é dividido em três abas: Sale, Inventory e Manager Area, sendo suas principais responsabilidades, a de venda de produtos, visualização do estoque e visualização das vendas diárias, respectivamente. Com isso, pode-se citar as principais funcionalidades do sistema:
+- **Pedido de produtos:** o sistema permite ao usuário a inserção dos itens disponibilizados no menu ao pedido, além de sua remoção. Ademais, é possível visualizar o valor atual da compra.
+- **Visualização e Atualização do estoque:** o sistema permite verificar a quantidade de produtos que ainda possui de determinado produto, sendo possível realizar a inserção ou remoção da quantidade de itens, caso seja necessário.
+- **Visualização do histórico de vendas:** permite verificar o valor total de vendas e o número de transações de determinado dia.
+
+---
 
 ## 💻 Como rodar 
 Este guia fornece o passo a passo necessário para configurar o ambiente, compilar e executar o sistema Java Café a partir do código fonte, garantindo que o sistema funcione corretamente de forma independente na máquina desejada.
@@ -9,13 +16,13 @@ Este guia fornece o passo a passo necessário para configurar o ambiente, compil
 ### 1. Pré-requisitos e Instalações de Softwares
   
 Para compilar e rodar a aplicação, é necessário instalar o Java Development Kit (JDK). Como o projeto utiliza componentes nativos do JavaSwing, a versão mínima recomendada é JDK 17 ou superior (o projeto foi desenvolvido na versão JDK 21):
-  - No Windows:
+  **- No Windows:**
     -  Acesse o site oficial da Oracle (https://www.oracle.com/br/java/technologies/downloads/) e faça download do JDK 17 ou superior. A seguir, um exemplo de onde se encontra o arquivo para download, escolha o que corresponde a sua máquina.
     - Execute o instalador e siga as instruções na tela.
    <img width="1357" height="524" alt="image" src="https://github.com/user-attachments/assets/bb3a99a8-f2c6-47b7-8d09-2846e7296437" />
     
     
-  - No Linux:
+  **- No Linux:**
     - Abra o terminal e execute os seguintes comandos para atualizar os repositórios e instalar o OpenJDK de forma nativa:
 ```
 sudo apt update && sudo apt upgrade
