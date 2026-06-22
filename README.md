@@ -16,13 +16,13 @@ Este guia fornece o passo a passo necessário para configurar o ambiente, compil
 ### 1. Pré-requisitos e Instalações de Softwares
   
 Para compilar e rodar a aplicação, é necessário instalar o Java Development Kit (JDK). Como o projeto utiliza componentes nativos do JavaSwing, a versão mínima recomendada é JDK 17 ou superior (o projeto foi desenvolvido na versão JDK 21):
-  **- No Windows:**
+  - **No Windows:**
     -  Acesse o site oficial da Oracle (https://www.oracle.com/br/java/technologies/downloads/) e faça download do JDK 17 ou superior. A seguir, um exemplo de onde se encontra o arquivo para download, escolha o que corresponde a sua máquina.
     - Execute o instalador e siga as instruções na tela.
    <img width="1357" height="524" alt="image" src="https://github.com/user-attachments/assets/bb3a99a8-f2c6-47b7-8d09-2846e7296437" />
     
     
-  **- No Linux:**
+  -**No Linux:**
     - Abra o terminal e execute os seguintes comandos para atualizar os repositórios e instalar o OpenJDK de forma nativa:
 ```
 sudo apt update && sudo apt upgrade
@@ -75,7 +75,7 @@ Para garantir o isolamento e independência de ambientes de desenvolvimento, os 
   ```
   # No Windows
   mkdir bin
-  javac -d bin src\model\Inventory.java src\model\Order.java src\model\Product.java src\model\SaleSummary.java src\persistence\DataManager.java src\controller\POSController.java src\view\JavaCafeGUI.java
+  javac -d bin src\model\*.java src\persistence\*.java src\controller\*.java src\view\*.java
 
   # No Linux
   mkdir bin
