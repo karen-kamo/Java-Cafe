@@ -234,12 +234,15 @@ public class JavaCafeGUI extends JFrame {
 		tableOrder.setBackground(new Color(255, 255, 255));
 		// defining the table model - columns Item, Price, Quantity
 		tableOrder.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Item", "Price", "Quantity"
-			}
-		));
+      new Object[][] {},
+      new String[] { "Item", "Price", "Quantity" }
+    ) {
+      @Override
+      public boolean isCellEditable(int row, int column) {
+        return false; // block editing of any row or column
+      }
+    });
+
 		tableOrder.setFont(new Font("Dialog", Font.PLAIN, 18));
 		tableOrder.setRowHeight(32);
 		tableOrder.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 18));
@@ -428,11 +431,14 @@ public class JavaCafeGUI extends JFrame {
 		tableInventory.setRowHeight(35);
 		// will have 3 columns - Item, Price e Quantity
 		tableInventory.setModel(new DefaultTableModel(
-			new Object[][] {},
-			new String[] {
-				"Item", "Price", "Quantity"
-			}
-		));
+      new Object[][] {},
+      new String[] { "Item", "Price", "Quantity" }
+    ) {
+      @Override
+      public boolean isCellEditable(int row, int column) {
+        return false;
+      }
+    });
 
 		// adding a scroll bar to the table
 		JScrollPane scrollPaneInventory = new JScrollPane(tableInventory);
@@ -581,12 +587,14 @@ public class JavaCafeGUI extends JFrame {
 		tableSales.setRowHeight(35);
 		// will have 3 columns - Date, Product Name and Price 
 		tableSales.setModel(new DefaultTableModel(
-			new Object[][] {},
-			new String[] {
-				"Date", "Product", "Price"
-			}
-		));
-		admPanel.add(tableSales);
+      new Object[][] {},
+      new String[] { "Date", "Product", "Price" }
+    ) {
+      @Override
+      public boolean isCellEditable(int row, int column) {
+        return false; 
+      }
+    });
 
 		// to scroll the sales table
 		JScrollPane scrollPaneTableSales = new JScrollPane(tableSales);
