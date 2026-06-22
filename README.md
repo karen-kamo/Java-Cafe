@@ -78,12 +78,17 @@ Para garantir o isolamento e independência de ambientes de desenvolvimento, os 
     
     - Copie os arquivos de banco de dados (.csv) existentes para a pasta de binários para garantir a persistência dos dados:
     ```
-    copy *.csv bin\
+    copy src\*.csv bin\
+    ```
+
+    - Vá para a pasta /bin
+    ```
+    cd bin
     ```
 
     - Agora, execute o sistema informando a pasta bin como origem e chamando a classe principal:
     ```
-    java -cp bin view.JavaCafeGUI
+    java view.JavaCafeGUI
     ```
     
   - No Linux:
@@ -101,12 +106,17 @@ Para garantir o isolamento e independência de ambientes de desenvolvimento, os 
 
     - Copie os arquivos de banco de dados (.csv) existentes para a pasta de binários para garantir a persistência dos dados:
     ```
-    cp *.csv bin/
+    cp src/*.csv bin/
+    ```
+
+    - Vá para a pasta /bin:
+    ```
+    cd bin
     ```
     
     - Agora, execute o sistema informando a pasta bin como origem e chamando a classe principal:
     ```
-     java -cp bin view.JavaCafeGUI
+     java view.JavaCafeGUI
     ```
 
   - Pronto! O programa está rodando.✨
