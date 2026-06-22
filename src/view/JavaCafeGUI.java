@@ -67,12 +67,16 @@ public class JavaCafeGUI extends JFrame {
 		this.controller = posController;
 
 		// window configuration
+		setTitle("Java Café - by Juan, Karen e Rebeca");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		// window icon
+		setIconImage(new ImageIcon(getClass().getResource("/view/imagens/LogoJavaCafe.png")).getImage());
 		
 		// to add the tabs - Sale, Inventory, Manager Area 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -97,6 +101,7 @@ public class JavaCafeGUI extends JFrame {
 
 		textFieldItem = new JTextField();
 		textFieldItem.setEnabled(false);
+		textFieldItem.setDisabledTextColor(Color.decode("#4f1e0c"));
 		textFieldItem.setFont(new Font("Dialog", Font.PLAIN, 18));
 		textFieldItem.setBounds(120, 406, 252, 23);
 		salePanel.add(textFieldItem);
@@ -184,6 +189,7 @@ public class JavaCafeGUI extends JFrame {
 		
 		textFieldTax = new JTextField();
 		textFieldTax.setEnabled(false);
+		textFieldTax.setDisabledTextColor(Color.decode("#4f1e0c"));
 		textFieldTax.setFont(new Font("Dialog", Font.PLAIN, 18));
 		textFieldTax.setColumns(10);
 		textFieldTax.setBounds(120, 476, 252, 23);
@@ -197,6 +203,7 @@ public class JavaCafeGUI extends JFrame {
 		
 		textFieldSubtotal = new JTextField();
 		textFieldSubtotal.setEnabled(false);
+		textFieldSubtotal.setDisabledTextColor(Color.decode("#4f1e0c"));
 		textFieldSubtotal.setFont(new Font("Dialog", Font.PLAIN, 18));
 		textFieldSubtotal.setColumns(10);
 		textFieldSubtotal.setBounds(120, 511, 252, 23);
@@ -210,6 +217,7 @@ public class JavaCafeGUI extends JFrame {
 
 		textFieldTotal = new JTextField();
 		textFieldTotal.setEnabled(false);
+		textFieldTotal.setDisabledTextColor(Color.decode("#4f1e0c"));
 		textFieldTotal.setFont(new Font("Dialog", Font.PLAIN, 18));
 		textFieldTotal.setColumns(10);
 		textFieldTotal.setBounds(120, 546, 252, 23);
@@ -242,6 +250,7 @@ public class JavaCafeGUI extends JFrame {
 		// textArea configuration for messages
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
+		textArea.setDisabledTextColor(Color.decode("#4f1e0c"));
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 
@@ -454,7 +463,7 @@ public class JavaCafeGUI extends JFrame {
 		//////////////////////////////////////
 		// configuring the label to display messages to the user
 		JLabel lblMsgInv = new JLabel("");
-		lblMsgInv.setBounds(100, 310, 500, 200);
+		lblMsgInv.setBounds(370, 310, 500, 200);
 		inventoryPanel.add(lblMsgInv);
 
 		// associating user actions with the button using events
@@ -577,7 +586,7 @@ public class JavaCafeGUI extends JFrame {
 		//////////////////////////////////////
 		// configuring the label to require messages from the user
 		lblMsgSales = new JLabel("");
-		lblMsgSales.setBounds(10, 547, 500, 30);
+		lblMsgSales.setBounds(410, 540, 500, 30);
 		admPanel.add(lblMsgSales);
 		
 		//////////////////////////////////////
@@ -635,6 +644,7 @@ public class JavaCafeGUI extends JFrame {
 
 		textFieldTotalRevenue = new JTextField();
 		textFieldTotalRevenue.setEnabled(false);
+		textFieldTotalRevenue.setDisabledTextColor(Color.decode("#4f1e0c"));
 		textFieldTotalRevenue.setFont(new Font("Dialog", Font.PLAIN, 18));
 		textFieldTotalRevenue.setColumns(10);
 		textFieldTotalRevenue.setBounds(175, 460, 252, 23);
@@ -649,6 +659,7 @@ public class JavaCafeGUI extends JFrame {
 		
 		textFieldNumberTransactions = new JTextField();
 		textFieldNumberTransactions.setEnabled(false);
+		textFieldNumberTransactions.setDisabledTextColor(Color.decode("#4f1e0c"));
 		textFieldNumberTransactions.setFont(new Font("Dialog", Font.PLAIN, 18));
 		textFieldNumberTransactions.setColumns(10);
 		textFieldNumberTransactions.setBounds(813, 460, 252, 23);
@@ -732,6 +743,3 @@ public class JavaCafeGUI extends JFrame {
 		}
 	}
 }
-		
-		
-
