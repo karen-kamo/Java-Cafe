@@ -18,28 +18,28 @@ Este guia fornece o passo a passo necessário para configurar o ambiente, compil
 Para compilar e rodar a aplicação, é necessário instalar o Java Development Kit (JDK). Como o projeto utiliza componentes nativos do JavaSwing, a versão mínima recomendada é JDK 17 ou superior (o projeto foi desenvolvido na versão JDK 21):
   - **No Windows:**
     -  Acesse o site oficial da Oracle (https://www.oracle.com/br/java/technologies/downloads/) e faça download do JDK 17 ou superior. A seguir, um exemplo de onde se encontra o arquivo para download, escolha o que corresponde a sua máquina.
+     <img width="1357" height="524" alt="image" src="https://github.com/user-attachments/assets/bb3a99a8-f2c6-47b7-8d09-2846e7296437" />
+     
     - Execute o instalador e siga as instruções na tela.
-   <img width="1357" height="524" alt="image" src="https://github.com/user-attachments/assets/bb3a99a8-f2c6-47b7-8d09-2846e7296437" />
     
-    
-  -**No Linux:**
+  - **No Linux:**
     - Abra o terminal e execute os seguintes comandos para atualizar os repositórios e instalar o OpenJDK de forma nativa:
-```
-sudo apt update && sudo apt upgrade
-sudo apt install openjdk-21-jdk openjdk-21-jre -y
-```
-  - Verifique se a instalação ocorreu corretamente, abra o terminal e digite o comando abaixo para garantir que o compilador do Java está acessível. Ambos os comandos devem retornar a versão instalada com sucesso, como mostra a imagem logo abaixo.
-```
-java -version
-javac -version
-```
+    ```
+    sudo apt update && sudo apt upgrade
+    sudo apt install openjdk-21-jdk openjdk-21-jre -y
+    ```
+    - Verifique se a instalação ocorreu corretamente, abra o terminal e digite o comando abaixo para garantir que o compilador do Java está acessível. Ambos os comandos devem retornar a versão instalada com sucesso, como mostra a imagem logo abaixo.
+    ```
+    java -version
+    javac -version
+    ```
 
-<img width="964" height="134" alt="image" src="https://github.com/user-attachments/assets/b7bf0d87-27b8-4154-802f-38393e1d1747" />
+    <img width="964" height="134" alt="image" src="https://github.com/user-attachments/assets/b7bf0d87-27b8-4154-802f-38393e1d1747" />
 
 ### 2. Download e Estrutura do Projeto
   - Dentro do repositório (https://github.com/karen-kamo/Java-Cafe) clique no botão ‘Code’ e clique em ‘Download ZIP’, como mostra a figura:
 
-<img width="484" height="364" alt="image" src="https://github.com/user-attachments/assets/96397635-7dd2-4535-993e-2ccb7001ad36" />
+  <img width="484" height="364" alt="image" src="https://github.com/user-attachments/assets/96397635-7dd2-4535-993e-2ccb7001ad36" />
 
   - Vá para a pasta que contém o arquivo ZIP instalado.
   - Extraia o arquivo.
