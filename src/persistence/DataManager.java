@@ -61,7 +61,7 @@ public class DataManager {
 
         String[] datas = line.split(","); // separate with commas
 
-        if (datas.length < 5) continue; // it should have 5 columns
+        if (datas.length < 4) continue; // it should have 4 columns
 
         // extracts data from the rows
         int orderId = Integer.parseInt(datas[0]); // order ID

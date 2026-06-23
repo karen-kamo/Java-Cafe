@@ -75,11 +75,11 @@ Para garantir o isolamento e independência de ambientes de desenvolvimento, os 
   ```
   # No Windows
   mkdir bin
-  javac -d bin src\model\*.java src\persistence\*.java src\controller\*.java src\view\*.java
+  javac -d bin src\model\*.java src\persistence\*.java src\exception\*.java src\controller\*.java src\view\*.java
 
   # No Linux
   mkdir bin
-  javac -d bin src/model/*.java src/persistence/*.java src/controller/*.java src/view/JavaCafeGUI.java
+  javac -d bin src/model/*.java src/persistence/*.java src/exception/*.java src/controller/*.java src/view/JavaCafeGUI.java
   ```
 
   - Copie a pasta de imagens para dentro do diretório bin para que a interface gráfica consiga carregar os ícones dos produtos:

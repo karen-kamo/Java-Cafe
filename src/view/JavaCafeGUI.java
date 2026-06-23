@@ -295,8 +295,7 @@ public class JavaCafeGUI extends JFrame {
 
 					// checking if it's in stock
 					if (!controller.hasEnoughStock(nameProduct, quantity)) {
-        		textArea.append(String.format("\nWARNING: Insufficient stock for %s.", nameProduct));
-						return;
+        		throw new exception.OutOfStockException(String.format("Insufficient stock for %s.", nameProduct));
 					}
 
 					// to add the desired quantity to the controller
@@ -320,6 +319,11 @@ public class JavaCafeGUI extends JFrame {
 				} catch (NumberFormatException ex) {
 					// if something that is not a number is entered
 					textArea.append("\nERROR: Please enter a valid whole number for Quantity.");
+				}
+				catch (exception.OutOfStockException ex){
+					textArea.append(String.format("\n WARNING: %s", ex.getMessage()));
+					textFieldItem.setText("");
+    			textFieldQuantity.setText("");
 				}
 			}
 		});
@@ -384,8 +388,40 @@ public class JavaCafeGUI extends JFrame {
 				}
 
 				try {
+					// before finalizing your purchase, assemble the receipt
+          StringBuilder receipt = new StringBuilder();
+          receipt.append("=============================\n");
+          receipt.append("          JAVA CAFE          \n");
+          receipt.append("=============================\n");
+          receipt.append(String.format("Date: %s\n", java.time.LocalDate.now()));
+          receipt.append("-----------------------------\n");
+          for (model.Product p : controller.getCurrentOrderProducts()) {
+            receipt.append(String.format("%-20s $ %6.2f\n", p.getName(), p.getPrice()));
+          }
+          
+          receipt.append("-----------------------------\n");
+          receipt.append(String.format("Subtotal:          $ %6.2f\n", controller.getSubtotal()));
+          receipt.append(String.format("Tax:               $ %6.2f\n", controller.getTax()));
+          receipt.append(String.format("TOTAL:             $ %6.2f\n", controller.getTotal()));
+          receipt.append("=============================\n");
+          receipt.append("   Thank you for your purchase!   \n");
+
+
 					// call the controller to process the stock reduction and save the data
 					controller.checkoutCurrentOrder();
+
+					// alignment of receipt items
+					JTextArea textAreaReceipt = new JTextArea(receipt.toString());
+					textAreaReceipt.setFont(new Font("Monospaced", Font.PLAIN, 14)); 
+          textAreaReceipt.setEditable(false);
+
+					// show receipt in a dialog box
+					javax.swing.JOptionPane.showMessageDialog(
+						JavaCafeGUI.this, 
+						textAreaReceipt, 
+						"Order Receipt", 
+						javax.swing.JOptionPane.INFORMATION_MESSAGE
+          );
 
 					// clear the financial fields
 					textFieldSubtotal.setText("0.00");
